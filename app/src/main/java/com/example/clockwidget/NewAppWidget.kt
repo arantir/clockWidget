@@ -27,6 +27,12 @@ class NewAppWidget : AppWidgetProvider() {
     override fun onDisabled(context: Context) {
         // Enter relevant functionality for when the last widget is disabled
     }
+
+    fun onClick() {
+        //val views = RemoteViews(context.packageName, R.layout.new_app_widget)
+        val views = RemoteViews(this.baseContext.packageName, R.layout.new_app_widget)
+        views.setTextViewText(R.id.appwidget_text, "ыыыы")
+    }
 }
 
 internal fun updateAppWidget(

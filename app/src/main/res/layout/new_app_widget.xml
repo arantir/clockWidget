@@ -1,24 +1,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/Widget.ClockWidget.AppWidget.Container"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.ClockWidget.AppWidgetContainer">
+    android:background="@android:color/transparent">
 
     <TextView
         android:id="@+id/appwidget_text"
-        style="@style/Widget.ClockWidget.AppWidget.InnerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
+        android:clickable="true"
         android:contentDescription="@string/appwidget_text"
+        android:gravity="center"
         android:padding="1dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
+        android:shadowColor="@color/black"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="8"
         android:text="@string/appwidget_text"
-        android:textSize="24sp"
-        android:textStyle="bold|italic" />
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        android:textStyle="bold" />
+
 </RelativeLayout>
