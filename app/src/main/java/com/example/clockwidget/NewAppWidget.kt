@@ -1,19 +1,17 @@
 package com.example.clockwidget
 
-import android.R.style.Widget
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
+import android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE
 import android.appwidget.AppWidgetProvider
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.widget.RemoteViews
-import android.widget.Toast
-import kotlinx.coroutines.internal.artificialFrame
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
 
 const val WIDGET_SYNC = "WIDGET_SYNC"
 
@@ -47,6 +45,14 @@ class NewAppWidget : AppWidgetProvider() {
             val appWidgetId = intent.getIntExtra("appWidgetId", 0)
             updateAppWidget(context, AppWidgetManager.getInstance(context), appWidgetId)
         }
+
+        val action = intent?.action
+        if (ACTION_APPWIDGET_UPDATE == action) {
+            // Update your widget here.
+            val appWidgetId = intent.getIntExtra("appWidgetId", 0)
+            updateAppWidget(context, AppWidgetManager.getInstance(context), appWidgetId)
+        }
+
         super.onReceive(context, intent)
     }
 
