@@ -7,12 +7,42 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/tvExample"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/appwidget_text"
+        android:gravity="center"
+        android:padding="1dp"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
+        android:shadowColor="@color/black"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="8"
+        android:text="@string/appwidget_text"
+        android:textColor="@color/white"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:background="@android:color/transparent" />
+
+    <Button
+        android:id="@+id/btColorPick"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/bt_color_pick_back"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/bt_color_pick"
+        android:textColor="@color/bt_color_pick_font"
+        android:textSize="24sp"
+        app:cornerRadius="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvExample"
+        app:layout_constraintStart_toStartOf="@+id/tvExample"
+        app:layout_constraintTop_toBottomOf="@+id/tvExample" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
