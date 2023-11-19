@@ -3,6 +3,7 @@
     <style name="Base.Theme.ClockWidget" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="Theme.ClockWidget" parent="Base.Theme.ClockWidget" />
@@ -15,6 +16,7 @@
         It needs to be 8dp or less than the value of appWidgetRadius
         -->
         <item name="appWidgetInnerRadius">8dp</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="Theme.ClockWidget.AppWidgetContainer" parent="Theme.ClockWidget.AppWidgetContainerParent">

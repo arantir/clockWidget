@@ -6,6 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/btAbout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:backgroundTint="@color/bt_color_pick_back"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="@string/bt_about"
+        android:textColor="@color/bt_color_pick_font"
+        android:textSize="24sp"
+        app:cornerRadius="4dp"
+        app:layout_constraintEnd_toEndOf="@+id/tvExample"
+        app:layout_constraintStart_toStartOf="@+id/tvExample"
+        app:layout_constraintTop_toBottomOf="@+id/btColorPick" />
+
     <TextView
         android:id="@+id/tvExample"
         android:layout_width="wrap_content"

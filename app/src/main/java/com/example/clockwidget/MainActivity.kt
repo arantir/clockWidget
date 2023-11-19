@@ -1,6 +1,7 @@
 package com.example.clockwidget
 
 //import android.R
+
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
@@ -9,7 +10,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.RemoteViews
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener
 import com.jaredrummler.android.colorpicker.ColorShape
@@ -20,9 +23,25 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //Покраска статусной строки.(Это та бесячая фиолетовая полоска сверху)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
+
+        //Конструктор сообщения для кнопки о программе.
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("")
+        builder.setMessage(R.string.about_text)
+        builder.setPositiveButton(android.R.string.yes) { dialog, which -> 0 }
+
+        //Нажатие на кнопку выбор цвета
         findViewById<Button>(R.id.btColorPick).setOnClickListener {
             //Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
             createColorPickerDialog(1)
+        }
+
+        //Нажатие на кнопку о программе
+        findViewById<Button>(R.id.btAbout).setOnClickListener {
+            //Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
+            builder.show()
         }
     }
 
