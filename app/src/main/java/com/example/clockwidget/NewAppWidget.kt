@@ -18,6 +18,7 @@ import java.util.TimerTask
 
 
 const val WIDGET_SYNC = "WIDGET_SYNC"
+var timer = Timer()
 
 /**
  * Implementation of App Widget functionality.
@@ -86,9 +87,8 @@ internal fun updateAppWidget(
 
     views.setOnClickPendingIntent(R.id.appwidget_text, pendingIntent)
 
-
+    //Таймер для регулярного обновления.
     val handler = Handler()
-    val timer = Timer()
 
     val task: TimerTask = object : TimerTask() {
         override fun run() {
@@ -112,6 +112,7 @@ internal fun updateAppWidget(
             })
         }
     }
+    timer = Timer()
     timer.scheduleAtFixedRate(task, 0, 5000) // Executes the task every 5 seconds.
 
 

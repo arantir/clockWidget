@@ -6,12 +6,15 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.widget.Button
 import android.widget.RemoteViews
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener
@@ -24,7 +27,7 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
         setContentView(R.layout.activity_main)
 
         //Покраска статусной строки.(Это та бесячая фиолетовая полоска сверху)
-        window.statusBarColor = ContextCompat.getColor(this, R.color.white)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.green)
 
         //Конструктор сообщения для кнопки о программе.
         val builder = AlertDialog.Builder(this)

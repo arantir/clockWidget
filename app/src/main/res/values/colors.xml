@@ -11,4 +11,5 @@
     <color name="background_widget">#FF01579B</color>
     <color name="bt_color_pick_font">#114707</color>
     <color name="bt_color_pick_back">#a3bc74</color>
+    <color name="green">#487c21</color>
 </resources>
