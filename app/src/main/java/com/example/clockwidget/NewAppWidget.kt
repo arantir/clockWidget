@@ -19,6 +19,7 @@ import java.util.TimerTask
 
 const val WIDGET_SYNC = "WIDGET_SYNC"
 var timer = Timer()
+var blockTimer: Boolean = true
 
 /**
  * Implementation of App Widget functionality.
@@ -45,15 +46,9 @@ class NewAppWidget : AppWidgetProvider() {
     }
 
     override fun onReceive(context: Context, intent: Intent?) {
+
         if (WIDGET_SYNC == intent?.action)
         {
-            val appWidgetId = intent.getIntExtra("appWidgetId", 0)
-            updateAppWidget(context, AppWidgetManager.getInstance(context), appWidgetId)
-        }
-
-        val action = intent?.action
-        if (ACTION_APPWIDGET_UPDATE == action) {
-            // Update your widget here.
             val appWidgetId = intent.getIntExtra("appWidgetId", 0)
             updateAppWidget(context, AppWidgetManager.getInstance(context), appWidgetId)
         }
@@ -71,50 +66,31 @@ internal fun updateAppWidget(
     val intent = Intent(context, NewAppWidget::class.java)
     intent.action = WIDGET_SYNC
     intent.putExtra("appWidgetId", appWidgetId)
-    val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+    var views = RemoteViews(context.packageName, R.layout.new_app_widget)
 
-    val widgetText = context.getString(R.string.appwidget_text)
-    // Construct the RemoteViews object
-    val views = RemoteViews(context.packageName, R.layout.new_app_widget)
-    views.setTextViewText(R.id.appwidget_text, widgetText)
+    if(blockTimer)
+    {
+        blockTimer = false
+        //Таймер для регулярного обновления.
+        val handler = Handler()
+        val task: TimerTask = object : TimerTask() {
+            override fun run() {
+                handler.post(Runnable {
+                    // send a broadcast to the widget.
 
-    // Текущее время
-    val currentDate = Date()
-    // Форматирование времени как "часы:минуты:секунды"
-    val timeFormat: DateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
-    val timeText = timeFormat.format(currentDate)
-    views.setTextViewText(R.id.appwidget_text, timeText)
+                    // Construct the RemoteViews object
+                    //views = RemoteViews(context.packageName, R.layout.new_app_widget)
 
-    views.setOnClickPendingIntent(R.id.appwidget_text, pendingIntent)
-
-    //Таймер для регулярного обновления.
-    val handler = Handler()
-
-    val task: TimerTask = object : TimerTask() {
-        override fun run() {
-            handler.post(Runnable {
-                // send a broadcast to the widget.
-                val widgetText = context.getString(R.string.appwidget_text)
-                // Construct the RemoteViews object
-                val views = RemoteViews(context.packageName, R.layout.new_app_widget)
-                views.setTextViewText(R.id.appwidget_text, widgetText)
-
-                // Текущее время
-                val currentDate = Date()
-                // Форматирование времени как "часы:минуты:секунды"
-                val timeFormat: DateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
-                val timeText = timeFormat.format(currentDate)
-                views.setTextViewText(R.id.appwidget_text, timeText)
-
-                views.setOnClickPendingIntent(R.id.appwidget_text, pendingIntent)
-                // Instruct the widget manager to update the widget
-                appWidgetManager.updateAppWidget(appWidgetId, views)
-            })
+                    // Текущее время
+                    views.setTextViewText(R.id.appwidget_text, SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date()))
+                    // Instruct the widget manager to update the widget
+                    appWidgetManager.updateAppWidget(appWidgetId, views)
+                })
+            }
         }
+        timer = Timer()
+        timer.scheduleAtFixedRate(task, 0, 1000) // Executes the task every 1 seconds.
     }
-    timer = Timer()
-    timer.scheduleAtFixedRate(task, 0, 5000) // Executes the task every 5 seconds.
-
 
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)
