@@ -1,24 +1,16 @@
 package com.example.clockwidget
 
-import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
-import android.appwidget.AppWidgetManager.ACTION_APPWIDGET_UPDATE
 import android.appwidget.AppWidgetProvider
 import android.content.Context
-import android.content.Intent
 import android.os.Handler
+import android.os.Looper
 import android.widget.RemoteViews
-import android.widget.Toast
-import java.text.DateFormat
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import java.util.Timer
-import java.util.TimerTask
 
-
-const val WIDGET_SYNC = "WIDGET_SYNC"
-var timer = Timer()
+//val autoUpdateWidget: AutoUpdateWidget = AutoUpdateWidget()
 var blockTimer: Boolean = true
 
 /**
@@ -52,31 +44,30 @@ internal fun updateAppWidget(
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
+    // send a broadcast to the widget.
 
+    // Construct the RemoteViews object
     var views = RemoteViews(context.packageName, R.layout.new_app_widget)
 
+    //Инициализируем и запускаем таймер 1 раз.
     if(blockTimer)
     {
         blockTimer = false
-        //Таймер для регулярного обновления.
-        val handler = Handler()
-        val task: TimerTask = object : TimerTask() {
+        val mainHandler = Handler(Looper.getMainLooper())
+        mainHandler.post(object : Runnable {
             override fun run() {
-                handler.post(Runnable {
-                    // send a broadcast to the widget.
 
-                    // Construct the RemoteViews object
-                    //views = RemoteViews(context.packageName, R.layout.new_app_widget)
+                //оповещения для проверки жизнеспособности таймера
+                //Toast.makeText(context, "---", Toast.LENGTH_SHORT).show()
 
-                    // Текущее время
-                    views.setTextViewText(R.id.appwidget_text, SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date()))
-                    // Instruct the widget manager to update the widget
-                    appWidgetManager.updateAppWidget(appWidgetId, views)
-                })
+                // Текущее время
+                views.setTextViewText(R.id.appwidget_text, SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date()))
+                // Instruct the widget manager to update the widget
+                appWidgetManager.updateAppWidget(appWidgetId, views)
+
+                mainHandler.postDelayed(this, 1000)
             }
-        }
-        timer = Timer()
-        timer.scheduleAtFixedRate(task, 0, 1000) // Executes the task every 1 seconds.
+        })
     }
 
     // Instruct the widget manager to update the widget
