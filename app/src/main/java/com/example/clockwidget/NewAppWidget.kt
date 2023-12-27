@@ -45,17 +45,6 @@ class NewAppWidget : AppWidgetProvider() {
         // Enter relevant functionality for when the last widget is disabled
     }
 
-    override fun onReceive(context: Context, intent: Intent?) {
-
-        if (WIDGET_SYNC == intent?.action)
-        {
-            val appWidgetId = intent.getIntExtra("appWidgetId", 0)
-            updateAppWidget(context, AppWidgetManager.getInstance(context), appWidgetId)
-        }
-
-        super.onReceive(context, intent)
-    }
-
 }
 
 internal fun updateAppWidget(
@@ -63,9 +52,7 @@ internal fun updateAppWidget(
     appWidgetManager: AppWidgetManager,
     appWidgetId: Int
 ) {
-    val intent = Intent(context, NewAppWidget::class.java)
-    intent.action = WIDGET_SYNC
-    intent.putExtra("appWidgetId", appWidgetId)
+
     var views = RemoteViews(context.packageName, R.layout.new_app_widget)
 
     if(blockTimer)
@@ -94,5 +81,6 @@ internal fun updateAppWidget(
 
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)
+
 }
 
