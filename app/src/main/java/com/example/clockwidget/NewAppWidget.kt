@@ -15,10 +15,9 @@ import java.util.Date
 import java.util.Locale
 import java.util.Timer
 import java.util.TimerTask
-
+import kotlin.properties.Delegates
 
 const val WIDGET_SYNC = "WIDGET_SYNC"
-var timer = Timer()
 var blockTimer: Boolean = true
 
 /**
@@ -67,31 +66,27 @@ internal fun updateAppWidget(
     intent.action = WIDGET_SYNC
     intent.putExtra("appWidgetId", appWidgetId)
     var views = RemoteViews(context.packageName, R.layout.new_app_widget)
+    // Текущее время
+    views.setTextViewText(R.id.appwidget_text, SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date()))
 
     if(blockTimer)
     {
-        blockTimer = false
         //Таймер для регулярного обновления.
         val handler = Handler()
         val task: TimerTask = object : TimerTask() {
             override fun run() {
                 handler.post(Runnable {
-                    // send a broadcast to the widget.
-
-                    // Construct the RemoteViews object
-                    //views = RemoteViews(context.packageName, R.layout.new_app_widget)
-
+                    var views = RemoteViews(context.packageName, R.layout.new_app_widget)
                     // Текущее время
                     views.setTextViewText(R.id.appwidget_text, SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date()))
-                    // Instruct the widget manager to update the widget
-                    appWidgetManager.updateAppWidget(appWidgetId, views)
+                    Toast.makeText(context, SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date()), Toast.LENGTH_SHORT).show()
                 })
             }
         }
-        timer = Timer()
-        timer.scheduleAtFixedRate(task, 0, 1000) // Executes the task every 1 seconds.
+        blockTimer = false
+        val timer = Timer()
+        timer.scheduleAtFixedRate(task, 0, 5000) // Executes the task every 5 seconds.
     }
-
     // Instruct the widget manager to update the widget
     appWidgetManager.updateAppWidget(appWidgetId, views)
 }
