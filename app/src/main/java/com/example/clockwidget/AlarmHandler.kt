@@ -16,7 +16,6 @@ class AlarmHandler(context: Context) {
         this.context = context
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
     fun setAlarmManager(){
         val intent : Intent = Intent(context, WidgetService::class.java)
         val sender : PendingIntent = PendingIntent.getBroadcast(context, 2, intent, PendingIntent.FLAG_IMMUTABLE)
@@ -29,7 +28,13 @@ class AlarmHandler(context: Context) {
         //set the alarm for 10 seconds in the future
         if (am != null)
         {
-            am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, l, sender)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                am.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, l, sender)
+            }
+            else
+            {
+                am.set(AlarmManager.RTC_WAKEUP, l, sender)
+            }
         }
     }
 

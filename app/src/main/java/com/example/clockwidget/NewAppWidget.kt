@@ -35,9 +35,9 @@ class NewAppWidget : AppWidgetProvider() {
         val value : Int = preferences.getInt("value", 1)
 
         //set the value in the textview
-        views.setTextViewText(R.id.appwidget_text, "" + value.toString())
+        views.setTextViewText(R.id.appwidget_text, "$value")
 
-        //Toast.makeText(context, "" + value.toString(), Toast.LENGTH_SHORT).show()
+        //Toast.makeText(context, "$value", Toast.LENGTH_SHORT).show()
 
         //update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views)

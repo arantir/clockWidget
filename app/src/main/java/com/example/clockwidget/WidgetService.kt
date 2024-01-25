@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.util.Log
+import android.widget.Toast
 
 class WidgetService: BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
