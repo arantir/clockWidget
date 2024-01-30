@@ -15,6 +15,36 @@ import java.util.Locale
  */
 class NewAppWidget : AppWidgetProvider() {
 
+    val handler = android.os.Handler(Looper.getMainLooper())
+
+    private lateinit var views : RemoteViews
+    private lateinit var appWidgetManager: AppWidgetManager
+    private var appWidgetId: Int = 0
+
+    private val r: Runnable = object : Runnable {
+        override fun run() {
+            handler.postDelayed(this, 5000)
+            setTimeLabel()
+        }
+    }
+
+    private fun updateAppWidget(
+        context: Context,
+        appWidgetManager: AppWidgetManager,
+        appWidgetId: Int
+    ) {
+        //оповещения для проверки жизнеспособности таймера
+        //Toast.makeText(context, "---", Toast.LENGTH_SHORT).show()
+
+        views = RemoteViews(context.packageName, R.layout.new_app_widget)
+        this.appWidgetManager = appWidgetManager
+        this.appWidgetId = appWidgetId
+
+        setTimeLabel()
+
+        handler.postDelayed(r, 5000)
+    }
+
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,
@@ -35,55 +65,17 @@ class NewAppWidget : AppWidgetProvider() {
         // Enter relevant functionality for when the last widget is disabled
     }
 
-}
+    fun setTimeLabel(){
 
-val handler = android.os.Handler(Looper.getMainLooper())
-/*
-val r: Runnable = object : Runnable {
-    override fun run() {
-        handler.postDelayed(this, 1000)
-        gameOver()
+        // Текущее время
+        views.setTextViewText(R.id.appwidget_text, SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date()))
+
+        // Instruct the widget manager to update the widget
+        appWidgetManager.updateAppWidget(appWidgetId, views)
     }
 }
-*/
-lateinit var views : RemoteViews
-lateinit var appWidgetManager: AppWidgetManager
-var appWidgetId: Int = 0
 
-internal fun updateAppWidget(
-    context: Context,
-    appWidgetManager: AppWidgetManager,
-    appWidgetId: Int
-) {
-    //оповещения для проверки жизнеспособности таймера
-    //Toast.makeText(context, "---", Toast.LENGTH_SHORT).show()
 
-    // Construct the RemoteViews object
-    //val views = RemoteViews(context.packageName, R.layout.new_app_widget)
 
-    // Текущее время
-    //views.setTextViewText(R.id.appwidget_text, SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date()))
 
-    // Instruct the widget manager to update the widget
-    //appWidgetManager.updateAppWidget(appWidgetId, views)
-    views = RemoteViews(context.packageName, R.layout.new_app_widget)
-    com.example.clockwidget.appWidgetManager = appWidgetManager
-    com.example.clockwidget.appWidgetId = appWidgetId
-
-    setTimeLabel()
-
-    handler.postDelayed(
-        {
-            setTimeLabel()
-        }, 5000)
-}
-
-fun setTimeLabel(){
-
-    // Текущее время
-    views.setTextViewText(R.id.appwidget_text, SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(Date()))
-
-    // Instruct the widget manager to update the widget
-    appWidgetManager.updateAppWidget(appWidgetId, views)
-}
 
