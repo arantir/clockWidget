@@ -1,27 +1,32 @@
 package com.example.clockwidget
 
 //import android.R
-
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.Context
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Handler
+import android.view.View
 import android.widget.Button
 import android.widget.RemoteViews
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import com.jaredrummler.android.colorpicker.ColorPickerDialog
 import com.jaredrummler.android.colorpicker.ColorPickerDialogListener
 import com.jaredrummler.android.colorpicker.ColorShape
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 
 class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
+
+    val context: Context = this
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -46,6 +51,7 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
             //Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
             builder.show()
         }
+
     }
 
     private fun createColorPickerDialog(id: Int) {
@@ -63,7 +69,6 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
         findViewById<TextView>(R.id.tvExample).setTextColor(color)
         //findViewById<TextView>(R.id.appwidget_text).setTextColor(color)
 
-        val context: Context = this
         val appWidgetManager = AppWidgetManager.getInstance(context)
         val remoteViews = RemoteViews(context.packageName, R.layout.new_app_widget)
         val thisWidget = ComponentName(context, NewAppWidget::class.java)
