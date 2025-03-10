@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="70dp"
-        android:backgroundTint="@color/bt_color_pick_back"
+        android:backgroundTint="@color/light_green"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="@string/bt_about"
@@ -24,8 +24,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/tvExample"
+    <TextClock
+        android:id="@+id/textClock"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -45,22 +45,43 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_centerInParent="true"
+        android:format24Hour="HH:mm:ss"/>
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textClock"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"
+        android:textStyle="normal"
+        android:text="@string/date_example"
+        android:shadowColor="@color/black"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="8"
+        app:layout_constraintEnd_toEndOf="@+id/textClock"
+        app:layout_constraintStart_toStartOf="@+id/textClock"
+        app:layout_constraintTop_toBottomOf="@+id/textClock" />
 
     <Button
         android:id="@+id/btColorPick"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:backgroundTint="@color/bt_color_pick_back"
+        android:backgroundTint="@color/light_green"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="@string/bt_color_pick"
         android:textColor="@color/bt_color_pick_font"
         android:textSize="24sp"
         app:cornerRadius="4dp"
-        app:layout_constraintEnd_toEndOf="@+id/tvExample"
-        app:layout_constraintStart_toStartOf="@+id/tvExample"
-        app:layout_constraintTop_toBottomOf="@+id/tvExample" />
+        app:layout_constraintEnd_toEndOf="@+id/textClock"
+        app:layout_constraintStart_toStartOf="@+id/textClock"
+        app:layout_constraintTop_toBottomOf="@+id/textClock" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

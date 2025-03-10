@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
         setContentView(R.layout.activity_main)
 
         //Покраска статусной строки.(Это та бесячая фиолетовая полоска сверху)
-        window.statusBarColor = ContextCompat.getColor(this, R.color.green)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.grey)
 
         //Конструктор сообщения для кнопки о программе.
         val builder = AlertDialog.Builder(this)
@@ -66,14 +66,15 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
     }
 
     override fun onColorSelected(dialogId: Int, color: Int) {
-        findViewById<TextView>(R.id.tvExample).setTextColor(color)
-        //findViewById<TextView>(R.id.appwidget_text).setTextColor(color)
+        findViewById<TextView>(R.id.textClock).setTextColor(color)
+        findViewById<TextView>(R.id.dateTextView).setTextColor(color)
 
         val appWidgetManager = AppWidgetManager.getInstance(context)
         val remoteViews = RemoteViews(context.packageName, R.layout.new_app_widget)
         val thisWidget = ComponentName(context, NewAppWidget::class.java)
         //remoteViews.setTextViewText(R.id.appwidget_text, "myText" + System.currentTimeMillis())
-        remoteViews.setInt(R.id.appwidget_text, "setTextColor", color)
+        remoteViews.setInt(R.id.textClock, "setTextColor", color)
+        remoteViews.setInt(R.id.dateTextView, "setTextColor", color)
         appWidgetManager.updateAppWidget(thisWidget, remoteViews)
     }
 
