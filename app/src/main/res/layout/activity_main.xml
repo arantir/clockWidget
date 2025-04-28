@@ -31,6 +31,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_centerInParent="true"
+        app:layout_constraintVertical_bias="0.2"
         android:format24Hour="HH:mm:ss"/>
 
     <TextClock
@@ -67,5 +68,71 @@
         app:layout_constraintEnd_toEndOf="@+id/textClock"
         app:layout_constraintStart_toStartOf="@+id/textClock"
         app:layout_constraintTop_toBottomOf="@+id/textClock" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clFontSize"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="@+id/btColorPick"
+        app:layout_constraintStart_toStartOf="@+id/btColorPick"
+        app:layout_constraintTop_toBottomOf="@+id/btColorPick">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clFontSizeInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btFontSizeChange"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/etFontSizeTime"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:text="24"
+                app:layout_constraintBottom_toTopOf="@+id/etFontSizeDate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:padding="10dp"
+                android:background="@drawable/edittext_background"
+                android:maxLength="3"/>
+
+            <EditText
+                android:id="@+id/etFontSizeDate"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="number"
+                android:text="14"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etFontSizeTime"
+                android:padding="10dp"
+                android:background="@drawable/edittext_background"
+                android:maxLength="3"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/btFontSizeChange"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:backgroundTint="@color/light_green"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="@string/bt_font_size"
+            android:textColor="@color/bt_color_pick_font"
+            android:textSize="24sp"
+            app:cornerRadius="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/clFontSizeInput"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
