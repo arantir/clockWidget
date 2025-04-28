@@ -35,21 +35,18 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
         window.statusBarColor = ContextCompat.getColor(this, R.color.grey)
 
         //Конструктор сообщения для кнопки о программе.
+        /*
         val builder = AlertDialog.Builder(this)
         builder.setTitle("")
         builder.setMessage(R.string.about_text)
         builder.setPositiveButton(android.R.string.yes) { dialog, which -> 0 }
+        builder.show()
+        */
 
         //Нажатие на кнопку выбор цвета
         findViewById<Button>(R.id.btColorPick).setOnClickListener {
             //Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
             createColorPickerDialog(1)
-        }
-
-        //Нажатие на кнопку о программе
-        findViewById<Button>(R.id.btAbout).setOnClickListener {
-            //Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
-            builder.show()
         }
 
     }
@@ -65,16 +62,19 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
             .show(this)
     }
 
+    //Действие при выборе цвета.
     override fun onColorSelected(dialogId: Int, color: Int) {
+        //Красим то что в главном экране приложения.
         findViewById<TextView>(R.id.textClock).setTextColor(color)
-        findViewById<TextView>(R.id.dateTextView).setTextColor(color)
+        findViewById<TextView>(R.id.textClockDate).setTextColor(color)
 
+        //Красим то что в виджете.
         val appWidgetManager = AppWidgetManager.getInstance(context)
         val remoteViews = RemoteViews(context.packageName, R.layout.new_app_widget)
         val thisWidget = ComponentName(context, NewAppWidget::class.java)
         //remoteViews.setTextViewText(R.id.appwidget_text, "myText" + System.currentTimeMillis())
-        remoteViews.setInt(R.id.textClock, "setTextColor", color)
-        remoteViews.setInt(R.id.dateTextView, "setTextColor", color)
+        remoteViews.setInt(R.id.textClockWidget, "setTextColor", color)
+        remoteViews.setInt(R.id.textClockDateWidget, "setTextColor", color)
         appWidgetManager.updateAppWidget(thisWidget, remoteViews)
     }
 

@@ -4,7 +4,5 @@
     <string name="date_example">00.00.0000</string>
     <string name="add_widget">Add widget</string>
     <string name="app_widget_description">This is an app widget description</string>
-    <string name="bt_color_pick">выбор цвета</string>
-    <string name="bt_about">о программе</string>
-    <string name="about_text">Программа управляет виджетом.\nВиджет показывает время.\nВ программе можно задать цвет шрифта.</string>
+    <string name="bt_color_pick">select color</string>
 </resources>

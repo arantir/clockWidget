@@ -5,7 +5,7 @@
     android:background="@android:color/transparent">
 
     <TextClock
-        android:id="@+id/textClock"
+        android:id="@+id/textClockWidget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -20,18 +20,20 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/dateTextView"
+    <TextClock
+        android:id="@+id/textClockDateWidget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textClock"
+        android:layout_below="@id/textClockWidget"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
-        android:textSize="14sp"
+        android:background="@android:color/transparent"
+        android:format24Hour="dd.MM.yyyy"
         android:shadowColor="@color/black"
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="8"
+        android:textColor="@color/white"
+        android:textSize="14sp"
         android:layout_marginTop="4dp"
         android:textStyle="normal" />
 

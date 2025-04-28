@@ -45,13 +45,13 @@ class NewAppWidget : AppWidgetProvider() {
             val views = RemoteViews(context.packageName, R.layout.new_app_widget)
 
             // Устанавливаем цвет текста
-            views.setInt(R.id.textClock, "setTextColor", color)
-            views.setInt(R.id.dateTextView, "setTextColor", color)
+            views.setInt(R.id.textClockWidget, "setTextColor", color)
+            views.setInt(R.id.textClockDateWidget, "setTextColor", color)
 
             // Получаем текущее время и дату
-            val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
-            val dateString = dateFormat.format(Date())
-            views.setTextViewText(R.id.dateTextView, dateString)
+            //val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+            //val dateString = dateFormat.format(Date())
+            //views.setTextViewText(R.id.dateTextView, dateString)
 
             // Обновляем виджет
             appWidgetManager.updateAppWidget(appWidgetId, views)

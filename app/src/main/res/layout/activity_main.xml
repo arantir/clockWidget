@@ -8,22 +8,6 @@
     android:background="@color/light_blue_50"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/btAbout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="70dp"
-        android:backgroundTint="@color/light_green"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="@string/bt_about"
-        android:textColor="@color/bt_color_pick_font"
-        android:textSize="24sp"
-        app:cornerRadius="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextClock
         android:id="@+id/textClock"
         android:layout_width="wrap_content"
@@ -49,21 +33,21 @@
         android:layout_centerInParent="true"
         android:format24Hour="HH:mm:ss"/>
 
-    <TextView
-        android:id="@+id/dateTextView"
+    <TextClock
+        android:id="@+id/textClockDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textClock"
         android:layout_centerHorizontal="true"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        android:layout_marginTop="4dp"
-        android:textStyle="normal"
-        android:text="@string/date_example"
+        android:background="@android:color/transparent"
+        android:format24Hour="dd.MM.yyyy"
         android:shadowColor="@color/black"
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="8"
+        android:textColor="@color/white"
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"
+        android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="@+id/textClock"
         app:layout_constraintStart_toStartOf="@+id/textClock"
         app:layout_constraintTop_toBottomOf="@+id/textClock" />
