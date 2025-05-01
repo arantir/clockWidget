@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.RemoteViews
 import android.widget.TextView
 import android.widget.Toast
@@ -43,10 +44,34 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener {
         builder.show()
         */
 
-        //Нажатие на кнопку выбор цвета
+        //Нажатие на кнопку выбор цвета.
         findViewById<Button>(R.id.btColorPick).setOnClickListener {
             //Toast.makeText(this@MainActivity, "You clicked me.", Toast.LENGTH_SHORT).show()
             createColorPickerDialog(1)
+        }
+
+        //Нажатие на кнопку изменить размер шрифта.
+        findViewById<Button>(R.id.btFontSizeChange).setOnClickListener {
+            // Получите текст из EditText и преобразуйте его в Float
+            val fontSizeStringTime = findViewById<EditText>(R.id.etFontSizeTime).text.toString()
+            val fontSizeStringDate = findViewById<EditText>(R.id.etFontSizeDate).text.toString()
+            var fontSizeTime = 14f // Значение по умолчанию
+            var fontSizeDate = 14f // Значение по умолчанию
+
+            if (fontSizeStringTime.isNotEmpty()) {
+                fontSizeTime = fontSizeStringTime.toFloatOrNull() ?: 14f // Используйте значение по умолчанию, если преобразование не удалось
+            }
+            if (fontSizeStringDate.isNotEmpty()) {
+                fontSizeDate = fontSizeStringDate.toFloatOrNull() ?: 14f // Используйте значение по умолчанию, если преобразование не удалось
+            }
+
+            //Меняем размер шрифта в виджете.
+            val appWidgetManager = AppWidgetManager.getInstance(context)
+            val remoteViews = RemoteViews(context.packageName, R.layout.new_app_widget)
+            val thisWidget = ComponentName(context, NewAppWidget::class.java)
+            remoteViews.setFloat(R.id.textClockWidget, "setTextSize", fontSizeTime)
+            remoteViews.setFloat(R.id.textClockDateWidget, "setTextSize", fontSizeDate)
+            appWidgetManager.updateAppWidget(thisWidget, remoteViews)
         }
 
     }

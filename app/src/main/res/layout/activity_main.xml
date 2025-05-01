@@ -100,7 +100,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:padding="10dp"
                 android:background="@drawable/edittext_background"
-                android:maxLength="3"/>
+                android:maxLength="3"
+                android:imeOptions="actionDone"/>
 
             <EditText
                 android:id="@+id/etFontSizeDate"
@@ -115,7 +116,8 @@
                 app:layout_constraintTop_toBottomOf="@+id/etFontSizeTime"
                 android:padding="10dp"
                 android:background="@drawable/edittext_background"
-                android:maxLength="3"/>
+                android:maxLength="3"
+                android:imeOptions="actionDone"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
